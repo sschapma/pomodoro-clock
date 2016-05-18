@@ -1,17 +1,20 @@
 $(document).ready(function() {
-  $(".settings").hide();
-  $('#pause').hide();
+  $(".settings").hide(); //settings modal hidden by default
+  $('#pause').hide(); //pause button hidden until timer started
   $(".fa").click(function(){
     $(".settings").toggle();
   });
 });
 
+// initial settings & variables
 var myInterval;
 var workTime = document.getElementById("work").innerHTML=25;
 var restTime = document.getElementById("break").innerHTML=5;
 var remainSec = workTime*60;
 var sessionNumber = 1;
 document.getElementById("timer").innerHTML=workTime + ":00";
+
+// begins timer
 function startWork(){
   document.getElementById("start").disabled = true;
   timer(callback);
@@ -21,12 +24,16 @@ function startWork(){
   $('#status').show();
   $('#statusBottom').show();
 };
+
+//pauses timer
 function pauseTime(){
   clearInterval(myInterval);
   document.getElementById("start").disabled = false;
   $('#start').show();
   $('#pause').hide();
 }
+
+// adjusts formatting of time display (adds colon between min & sec and adds 0 if necessary)
 function displayTime(remainingTime){
 if(remainingTime%60 >= 10) {
   document.getElementById('timer').innerHTML=Math.floor(remainingTime/60) + ':' + Math.floor(remainingTime%60);
@@ -35,15 +42,17 @@ else{
   document.getElementById('timer').innerHTML=Math.floor(remainingTime/60) + ':' + "0" + Math.floor(remainingTime%60) ;
     }
 }
+
+//controls timer
 function timer(cb) {
   var remainingTime = remainSec;
   document.getElementById('status').innerHTML="Session " + sessionNumber;
   document.getElementById('statusBottom').innerHTML="Session " + sessionNumber;
-  myInterval=setTimeout(function() {  
+  myInterval=setTimeout(function() {
     displayTime(remainingTime);
     if (remainingTime >= 0) {
       remainSec--;
-      timer(cb); 
+      timer(cb);
     }
     else{
     clearInterval();
@@ -52,6 +61,7 @@ function timer(cb) {
   }, 1000);
 }
 
+//moves from work to break
 var callback = function() {
   console.log('callback');
   $('#status').hide();
@@ -64,6 +74,8 @@ var callback = function() {
   document.getElementById('bell').play();
 
 };
+
+// moves from break to the next session
 var callbackRest = function() {
   clearInterval(myInterval);
   console.log('callbackRest');
@@ -82,6 +94,8 @@ var callbackRest = function() {
   $('#pause').show();
   timer(callback);
 };
+
+//resets the clock
 function resetTime(){
   clearInterval(myInterval);
   remainSec=workTime*60;
@@ -95,6 +109,9 @@ function resetTime(){
   $('#breakTimeBottom').hide();
   document.getElementById("timer").innerHTML=workTime + ":00"
 }
+
+//the following 4 functions +/- time for work and break
+
 function minusWork(){
   if(workTime >= 2) {
   pauseTime();
@@ -116,6 +133,8 @@ function plusBreak(){
   pauseTime();
   document.getElementById('break').innerHTML=++restTime;
 }
+
+// listen for button clicks to adjust settings and timer
 document.getElementById('start').addEventListener('click', startWork);
 document.getElementById('pause').addEventListener('click', pauseTime);
 document.getElementById('reset').addEventListener('click', resetTime);

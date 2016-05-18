@@ -3,60 +3,49 @@
   <head>
     <meta charset="UTF-8">
     <title>Pomodoro Clock</title>
-    
-    
-    
+
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css'>
-
-        <link rel="stylesheet" href="css/style.css">
-
-    
-    
-    
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css'>
+    <link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,700|Audiowide' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
+    <audio id="bell" src="https://db.tt/vD2NFZf7" preload="auto"></audio>
+    <div class="header">
+        <h1>Pomodoro Clock</h1>
 
-    <link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,700|Audiowide' rel='stylesheet' type='text/css'>
+        <!--Creates settings wheel to toggle settings modal-->
+        <span class="fa fa-cog" alt="Settings"></i>
+    </div>
 
-<audio id="bell" src="https://db.tt/vD2NFZf7" preload="auto"></audio>
+    <!--Creates settings modal to adjust work and rest time-->
+    <div class='settings center'>
+      <h7 class='rest'>REST</h7>
+      <h7>WORK</h7>
+      <h2><button id="minb">-</button><span id="break"></span><button id="plub">+</button>
+      <button id="minw">-</button><span id="work"></span><button id="pluw">+</button></h2>
+   </div>
 
-<body>
-  <div class="header">
-    <h1>Pomodoro Clock</h1>
-    <span class="fa fa-cog" alt="Settings"></i></div>
-  
-  <div class='settings center'>
-    <h7 class='rest'>REST</h7>
-    <h7>WORK</h7>
-    <h2>
-      <button id="minb">-</button><span id="break"></span><button id="plub">+</button>
-    <button id="minw">-</button><span id="work"></span><button id="pluw">+</button>
-    </h2>
-  </div>
+   <!--Creates header the displays session number or break time-->
+   <div id="status"></div>
+   <div id="breakTime"></div>
 
-  <div id="status"></div>
-  <div id="breakTime"></div>
+   <!--Displays the countdown timer-->
+   <div id="timer" class="timer"><br><br></div>
 
-  <div id="timer" class="timer"><br><br></div>
+   <!--Same as above, added for symmetry-->
+    <div id="statusBottom"></div>
+    <div id="breakTimeBottom"></div>
 
+    <!--Adds start, pause and reset buttons-->
+    <div class='wrapper'>
+      <button onclick="myFunction()" id="start" class='button'>Start</button>
+      <button onclick="myFunction()" id="pause" class='button'>Pause</button>
+      <button onclick="myFunction()" id="reset" class='button'>Reset</button>
+    </div>
 
-  <div id="statusBottom"></div>
-  <div id="breakTimeBottom"></div>
-
-  <div class='wrapper'>
-    <button onclick="myFunction()" id="start" class='button'>Start</button>
-    <button onclick="myFunction()" id="pause" class='button'>Pause</button>
-    <button onclick="myFunction()" id="reset" class='button'>Reset</button>
-  </div>
-</body>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-        <script src="js/index.js"></script>
-
-    
-    
-    
+    <script src="js/index.js"></script>
   </body>
 </html>
